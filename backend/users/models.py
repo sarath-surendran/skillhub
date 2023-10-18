@@ -36,6 +36,7 @@ class CustomUserManager(BaseUserManager):
             password,
         )
         user.is_admin = True
+        user.is_instructor = True
         # user.is_staff  = True
         # user.is_superuser = True
         user.save(using=self._db)
@@ -50,6 +51,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_instructor = models.BooleanField(default=False)
+
+    email_verified = models.BooleanField(default=False)
+    email_verification_token = models.CharField(max_length=255, blank=True)
 
     objects = CustomUserManager()
 
@@ -75,3 +79,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         Does the user have permissions to view the app `app_label`?
         """
         return True
+    
+class ForgotPassword(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete= models.CASCADE)
+    token = models.CharField(max_length=255,unique=True, null=True, blank=True)

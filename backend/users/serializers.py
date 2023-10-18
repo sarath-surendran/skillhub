@@ -40,3 +40,20 @@ class UserViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['name','email','phone']
+
+# class ChangePasswordSerializer(serializers.Serializer):
+#     new_password = serializers.CharField()
+    
+#     def validate(self, value):
+#         print("serializer")
+#         print("Validating new_password:", value)
+        # if len(value) < 8:
+        #     raise serializers.ValidationError("Password must be at least 8 characters long")
+        
+        # if not re.search(r'[!@#$%^&*(),.?":{}|<>]', value):
+        #     raise serializers.ValidationError("Password must contain at least one special character")
+        
+        # if not any(char.isdigit() for char in value):
+        #     raise serializers.ValidationError("Password must contain at least one numeric digit")
+#         return value
+

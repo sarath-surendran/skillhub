@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { Navigate, Outlet, Route} from "react-router-dom";
+import { Navigate, Outlet} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import AdminDashboard from "../pages/AdminDashboard";
+
 
 const Privateroute = () => {
     let {user} = useContext(AuthContext)
@@ -16,7 +16,7 @@ export const AdminRoute = () => {
     let {user} = useContext(AuthContext)
 
     return(
-       user && user.is_admin ? <AdminDashboard/> : <Outlet/>
+       user && user.is_admin ? <Outlet/> : <Navigate to='/login'/>
     )
 }
 export const InstuctorRoute = () => {

@@ -24,11 +24,28 @@ export const AuthProvider = ({children}) => {
         })
         let data = await response.json()
         if (response.status === 200){
-            setAuthToken(data)
-            setUser(jwt_decode(data.access))
-            // console.log(jwt_decode(data.access));
-            localStorage.setItem('authToken', JSON.stringify(data))
-            navigate('/')
+            let decoded = jwt_decode(data.access)
+            console.log(decoded);
+            if(decoded.email_verified){
+                setAuthToken(data)
+                setUser(jwt_decode(data.access))
+                console.log(jwt_decode(data.access))
+                localStorage.setItem('authToken', JSON.stringify(data))
+                if(decoded.is_active){
+                    if(decoded.is_admin){
+                        navigate('/admin/dashboard')
+                    }
+                    else{
+                        navigate('/')
+                    }
+                }
+                else{
+                    alert("You are blocked by the Admin.")
+                }
+            }else{
+				alert("Please verify the email address.")
+			}
+            
         }else{
             alert("Please verify your credentials")
         }
@@ -53,9 +70,16 @@ export const AuthProvider = ({children}) => {
         })
         let data = await response.json()
         if (response.status === 200){
-            setAuthToken(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authToken', JSON.stringify(data))
+            let decoded = jwt_decode(data.access)
+
+            if(decoded.is_active){
+                setAuthToken(data)
+                setUser(jwt_decode(data.access))
+                localStorage.setItem('authToken', JSON.stringify(data))
+            }
+            else{
+                logout()
+            }
         }else{
             logout()
         }
@@ -66,6 +90,7 @@ export const AuthProvider = ({children}) => {
 
     let ContextData = {
         user:user,
+        authToken:authToken,
         setUser:setUser,
         setAuthToken:setAuthToken,
         login:login,

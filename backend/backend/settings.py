@@ -14,16 +14,23 @@ from pathlib import Path
 from datetime import timedelta
 
 from django.conf import settings
+import os
+import firebase_admin
+from firebase_admin import credentials
+
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o$27v&#z4jubh=86$@(@j$33#jw3*de3dsx2t8-x=yc2bws#(n'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,6 +41,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +49,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'courses',
+    'enrollments',
+    'userprofile',
+    'review_ratings',
+    'course_progress',
+    "admin_user",
     'rest_framework',
     "corsheaders",
+    "chats",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +71,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ASGI_APPLICATION = "backend.asgi.application"
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -85,8 +117,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'skillhub',
-        'USER': 'skillhub',
-        'PASSWORD': 'skillhub@123',
+        'USER': config("USER"),
+        'PASSWORD':config("PASSWORD"),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -187,3 +219,23 @@ AUTH_USER_MODEL = "users.CustomUser"
 # ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Replace with your Gmail password or an app-specific password
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')
+
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+PUBLIC_KEY=config('PUBLIC_KEY')
+SECRET_KEY=config('SECRET_KEY')
+
