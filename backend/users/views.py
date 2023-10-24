@@ -145,3 +145,36 @@ class ForgotPasswordConfirmView(APIView):
         except Exception as e:
             print(e)
             raise serializers.ValidationError("Token error")
+
+class GoogleAuthRegister(APIView):
+    def post(self, request):
+        name = request.data.get("name")
+        email = request.data.get("email")
+        google_id = int(request.data.get('google_id'))
+        password = f"googleAuth@{google_id}"
+        confirm_password = password
+
+        user = CustomUser.objects.filter(email = email).exists()
+        if user:
+            return Response({"message":"user exist"})     
+        else:
+            data = {
+                "name":name,
+                "email": email,
+                "password":password,
+                "confirm_password": confirm_password,
+                "phone":"",
+                # "email_verified":True
+                
+            }
+            serializer = UserRegisterSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                verified_user = CustomUser.objects.get(email=email)
+                verified_user.email_verified = True
+                verified_user.save()
+                return Response({"message":"user saved"})
+            else:
+                print(serializer.errors)
+                return Response(serializer.errors)
+

@@ -1,14 +1,16 @@
+import json
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
 from rest_framework import status
+from django.conf import settings
 from .serializers import LessonSerializer,CourseSerializer, CategorySerializer, CourseListViewSerializer, LessonViewSerializer,CourseUpdateSerializer, Fullcourseserializer
 from .models import Category, Course, Lesson
 from users.models import CustomUser
-import firebase_admin
-from firebase_admin import credentials, storage
-from django.conf import settings
+# import firebase_admin
+# from firebase_admin import credentials, storage
+
 from google.auth.exceptions import GoogleAuthError
-import json
+
 from enrollments.views import PaymentRefund
 
 # Create your views here.

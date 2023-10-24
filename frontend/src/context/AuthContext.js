@@ -13,14 +13,15 @@ export const AuthProvider = ({children}) => {
     // let [loading,setLoading] = useState(true)
     const navigate = useNavigate()
 
-    let login = async (e ) => {
-        e.preventDefault()
+    let login = async (email, password ) => {
+        console.log('email',email);
+        console.log('password',password)
         let response = await fetch('http://localhost:8000/api/token/', {
             method:'POST',
             headers:{
                 "Content-type": "application/json"
             },
-            body:JSON.stringify({'email':e.target.email.value,'password':e.target.password.value})
+            body:JSON.stringify({'email':email,'password':password})
         })
         let data = await response.json()
         if (response.status === 200){

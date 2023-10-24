@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <GoogleOAuthProvider clientId='227958524001-lrsq7riq3n16n9e6nlbn4b342kse6hj6.apps.googleusercontent.com'>
+    <>
+       <App />
+      </>
+  </GoogleOAuthProvider>
   
-  <>
-<App />
-  </>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
