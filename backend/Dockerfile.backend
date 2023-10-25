@@ -48,5 +48,5 @@ EXPOSE 8000
 RUN mkdir -p /static && \
     mkdir -p /media
 RUN chmod +x /app/server-entrypoint.sh
-# RUN chmod +x /app/worker-entrypoint.sh
-# RUN chmod +x /app/beat-entrypoint.sh
+RUN chmod +x /app/worker-entrypoint.sh
+RUN chmod +x /app/beat-entrypoint.sh

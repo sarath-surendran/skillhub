@@ -35,7 +35,9 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -87,9 +89,52 @@ ASGI_APPLICATION = "backend.asgi.application"
 # }
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis", 6379)],
+        },
     },
 }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#     },
+# }
+
+# Celery configurations testing
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # or your broker URL
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # if you need results
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+
+# Celery Configuration - production
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+
+# celery beat confifuration
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # or your broker URL
+
+ist_hour = 15
+ist_minute = 0
+utc_hour = ist_hour - 5  # Adjust for the UTC offset
+utc_minute = ist_minute - 30  # Adjust for the UTC offset
+
+CELERY_BEAT_SCHEDULE = {
+    'send_daily_reminders': {
+        'task': 'enrollments.tasks.send_daily_reminders',
+        'schedule': crontab(hour=10, minute=35),  # 12 am daily
+    },
+}
+
+
 
 
 ROOT_URLCONF = 'backend.urls'
@@ -122,7 +167,7 @@ DATABASES = {
         'NAME': 'skillhub',
         'USER': config("USER"),
         'PASSWORD':config("PASSWORD"),
-        'HOST': 'localhost',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
@@ -162,7 +207,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type

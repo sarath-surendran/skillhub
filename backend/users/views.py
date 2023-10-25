@@ -173,6 +173,8 @@ class GoogleAuthRegister(APIView):
                 verified_user = CustomUser.objects.get(email=email)
                 verified_user.email_verified = True
                 verified_user.save()
+                profile = Profile.objects.create(user=verified_user)
+                profile.save()
                 return Response({"message":"user saved"})
             else:
                 print(serializer.errors)

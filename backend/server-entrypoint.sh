@@ -13,8 +13,8 @@
 # done
 
 # Sleep for a few seconds to ensure the database is ready
-echo "Waiting for the database to start..."
-sleep 10
+# echo "Waiting for the database to start..."
+# sleep 10
 
 python manage.py makemigrations
 
@@ -22,8 +22,9 @@ python manage.py migrate --noinput
 
 
 # Create a superuser with custom values and password
-python manage.py createsuperuser --noinput --username admin --email adminl@gmail.com
-python manage.py changepassword admin admin@123
+# python manage.py createsuperuser --noinput --username admin --email adminl@gmail.com
+# python manage.py changepassword admin admin@123
+# python manage.py createsuperuser --noinput
 
 
 python manage.py collectstatic --noinput

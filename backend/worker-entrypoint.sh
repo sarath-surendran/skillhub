@@ -5,6 +5,6 @@ set -o nounset
 
 
 # Run a Celery worker
-celery -A core worker --loglevel=info
+celery -A backend worker --loglevel=info
 
 worker
