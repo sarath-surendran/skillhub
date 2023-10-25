@@ -8,6 +8,7 @@ import { useContext, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import config from '../config';
 
 const ChangePasswordPage = () => {
 
@@ -46,7 +47,7 @@ const ChangePasswordPage = () => {
     const handleSubmit = async ()=>{
         try{
             const response = await axios.post(
-                'http://127.0.0.1:8000/users/change_password/',
+                `${config.axios_url}users/change_password/`,
                 {
                     "current_password": passwordData.current_password,
                     "new_password": passwordData.new_password

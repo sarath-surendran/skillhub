@@ -15,22 +15,22 @@ services:
 
   
 
-  # nginx:
-  #   container_name: nginx
-  #   build:
-  #     context: ./nginx
-  #     dockerfile: Dockerfile.nginx
-  #   ports:  
-  #     - 80:80
-  #     - 443:443
-  #   restart: unless-stopped
-  #   volumes:
-  #     - nginx:/etc/nginx/conf.d
-  #     # - certbot_conf:/etc/letsencrypt
-  #     # - certbot_www:/var/www/certbot
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.nginx
+    ports:  
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    volumes:
+      - nginx:/etc/nginx/conf.d
+      # - certbot_conf:/etc/letsencrypt
+      # - certbot_www:/var/www/certbot
       
-  #   depends_on:
-  #     - backend
+    depends_on:
+      - backend
 
 
   # certbot:

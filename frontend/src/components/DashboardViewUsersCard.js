@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { FaUsers } from 'react-icons/fa'
 import AuthContext from '../context/AuthContext';
+import config from '../config';
 
 const DashboardViewUsersCard = () => {
   const [allUsers, setAllUsers] = useState([])
@@ -10,7 +11,7 @@ const DashboardViewUsersCard = () => {
   const fetchAllUsers = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/admin_user/get_users/",
+        `${config.axios_url}admin_user/get_users/`,
         {
           headers: {
             // "Content-Type": "multipart/form-data",

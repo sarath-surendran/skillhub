@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import config from '../config'
 
 const ViewReviewAndRatings = ({course_id}) => {
     const [allReviews, setAllReviews] = useState([])
@@ -11,7 +12,7 @@ const ViewReviewAndRatings = ({course_id}) => {
     const fetchAllReviews = async () => {
         try{
             const response = await axios.get(
-                `http://127.0.0.1:8000/review&ratings/get_review/?id=${course_id}`
+                `${config.axios_url}review&ratings/get_review/?id=${course_id}`
             )
             setAllReviews(response.data)
         }

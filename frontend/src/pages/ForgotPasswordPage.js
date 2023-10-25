@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import Header from "../components/Header";
+import config from "../config";
 
 
 
@@ -30,7 +31,7 @@ const ForgotPasswordPage = () => {
     e.preventDefault()
     try{
          await axios.post(
-            'http://127.0.0.1:8000/users/forgot_password/',
+            `${config.axios_url}users/forgot_password/`,
             {
                 "email":email
             },

@@ -5,6 +5,7 @@ import axios, { Axios } from 'axios';
 import AuthContext from '../context/AuthContext';
 import ViewReviewAndRatings from '../components/ViewReviewAndRatings';
 import Header from '../components/Header';
+import config from '../config';
 
 const CourseDetailsPage = () => {
     const {id} = useParams()
@@ -16,7 +17,7 @@ const CourseDetailsPage = () => {
     const fetchEnrollment = async () => {
       try{
         const response = await axios.get(
-          `http://127.0.0.1:8000/enrollments/get_enrollment/?id=${id}`,
+          `${config.axios_url}enrollments/get_enrollment/?id=${id}`,
           {
             headers: {
               // Accept: "application/json",
@@ -37,7 +38,7 @@ const CourseDetailsPage = () => {
     const fetchCourseDetails = async () => {
         try{
             const response = await axios.get(
-                `http://127.0.0.1:8000/courses/get_course/?id=${id}`
+                `${config.axios_url}courses/get_course/?id=${id}`
             )
             setCourse(response.data)
             console.log(response.data)
@@ -64,7 +65,7 @@ const CourseDetailsPage = () => {
         bodyData.append("response", JSON.stringify(response));
 
         await axios.post(
-          `http://127.0.0.1:8000/enrollments/add_enrollment/success/?id=${id}`,
+          `${config.axios_url}enrollments/add_enrollment/success/?id=${id}`,
           bodyData,
           {
             headers: {
@@ -93,7 +94,7 @@ const CourseDetailsPage = () => {
 
       console.log(bodyData.get('amount'))
       const data = await axios.post(
-        `http://127.0.0.1:8000/enrollments/add_enrollment/?id=${id}`,
+        `${config.axios_url}enrollments/add_enrollment/?id=${id}`,
         bodyData,
         {
           headers: {
@@ -143,7 +144,7 @@ const CourseDetailsPage = () => {
       try{
         if(course[0].is_free){
           const response = await axios.post(
-            `http://127.0.0.1:8000/enrollments/add_enrollment/?id=${id}`,
+            `${config.axios_url}enrollments/add_enrollment/?id=${id}`,
             {},
             {
               headers: {
@@ -173,10 +174,10 @@ const CourseDetailsPage = () => {
 
 
     // console.log("user",user.id)
-    // const imageUrl = `http://localhost:8000${course[0].thumbnail}`
+    // const imageUrl = `${config.media_url}${course[0].thumbnail}`
     let imageUrl = ''
     if (course && course.length>0 && course[0]){
-         imageUrl = `http://localhost:8000${course[0].thumbnail}`
+         imageUrl = `${config.media_url}${course[0].thumbnail}`
     }
   return (
     <div>

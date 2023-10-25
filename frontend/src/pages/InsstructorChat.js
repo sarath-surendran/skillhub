@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import ChatComponent from "../components/ChatComponent";
 import AuthContext from "../context/AuthContext";
 import Header from "../components/Header";
+import config from "../config";
 
 const InsstructorChat = () => {
   const [chatList, setChatList] = useState([]);
@@ -16,7 +17,7 @@ const InsstructorChat = () => {
   const fetchChatList = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/chats/get_chat_list/",
+        `${config.axios_url}chats/get_chat_list/`,
         {
             headers: {
               Authorization: `Bearer ${authToken.access}`,
@@ -56,7 +57,7 @@ const InsstructorChat = () => {
         <div className="w-1/4 border-r-2 border-gray-200 pr-4 pt-4">
           
           {chatList.map((user, index)=>{
-           const imageUrl = `http://localhost:8000${user.image}`;
+           const imageUrl = `${config.media_url}${user.image}`;
            const chatStyle = index === nowChatting ? selectedChatStyle : normalChatStyle;
           
             return(

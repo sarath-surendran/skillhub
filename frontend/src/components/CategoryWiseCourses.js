@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 
 const CategoryWiseCourses = ({ id }) => {
   const [courses, setCourses] = useState([]);
@@ -10,7 +11,7 @@ const CategoryWiseCourses = ({ id }) => {
   const fetchCategory = async () => {
     try{
         const response = await axios.get(
-            `http://127.0.0.1:8000/courses/get_category/?id=${id}`
+            `${config.axios_url}courses/get_category/?id=${id}`
         )
         setCategory(response.data)
     }
@@ -22,7 +23,7 @@ const CategoryWiseCourses = ({ id }) => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/courses/view_full_courses_by_category/?id=${id}`
+        `${config.axios_url}courses/view_full_courses_by_category/?id=${id}`
       );
       setCourses(response.data);
     } catch (error) {
@@ -41,7 +42,7 @@ const CategoryWiseCourses = ({ id }) => {
         <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {courses.map((course) => {
-            const imageUrl = `http://localhost:8000${course.thumbnail}`;
+            const imageUrl = `${config.media_url}${course.thumbnail}`;
             return (
               <div
                 key={course.id} // Add a unique key for each mapped element

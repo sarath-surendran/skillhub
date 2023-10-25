@@ -6,6 +6,7 @@ import logo from "../images/skillhub.png";
 import Header from "../components/Header";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import config from "../config";
 
 const LoginPage = () => {
   let { login } = useContext(AuthContext);
@@ -31,7 +32,7 @@ const LoginPage = () => {
         .then((res) => {
           setProfile(res.data);
           const registerResponse =  axios.post(
-            'http://127.0.0.1:8000/users/google_register/',
+            `${config.axios_url}users/google_register/`,
             {
                 "name":res.data.name,
                 "email":res.data.email,

@@ -14,6 +14,7 @@ import {
 } from "firebase/storage";
 import UserSideBar from "./UserSideBar";
 import { v4 as uuidv4 } from "uuid";
+import config from "../config";
 
 const AddCourse = () => {
   const [courseData, setCourseData] = useState({
@@ -47,7 +48,7 @@ const AddCourse = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/courses/view_categories/"
+        `${config.axios_url}courses/view_categories/`
       );
       setCategories(response.data);
     } catch (error) {
@@ -279,7 +280,7 @@ const AddCourse = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/courses/add_course/",
+        `${config.axios_url}courses/add_course/`,
         // courseData,
         formData,
 

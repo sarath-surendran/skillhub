@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { BsBook } from 'react-icons/bs'
 import AuthContext from '../context/AuthContext'
 import { useEffect } from 'react'
+import config from '../config'
 
 const DashboardEnrollmentsCard = () => {
     const [paidEnrollments, setPaidEnrollments] = useState([])
@@ -14,7 +15,7 @@ const DashboardEnrollmentsCard = () => {
     const fetchPaidEnrollments = async () => {
         try{
             const response = await axios.get(
-                "http://127.0.0.1:8000/admin_user/get_paid_enrollments/",
+                `${config.axios_url}admin_user/get_paid_enrollments/`,
                 {
                 headers: {
                     // "Content-Type": "multipart/form-data",
@@ -31,7 +32,7 @@ const DashboardEnrollmentsCard = () => {
     const fetchFreeEnrollments = async () => {
         try{
             const response = await axios.get(
-                "http://127.0.0.1:8000/admin_user/get_free_enrollments/",
+                `${config.axios_url}admin_user/get_free_enrollments/`,
                 {
                 headers: {
                     // "Content-Type": "multipart/form-data",

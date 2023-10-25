@@ -3,6 +3,7 @@ import logo from "../images/skillhub.png";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import config from "../config";
 
 const Header = () => {
   let { user } = useContext(AuthContext);
@@ -14,7 +15,7 @@ const Header = () => {
   const fetchCategories = async () => {
     try{
       const response = await axios.get(
-        'http://127.0.0.1:8000/courses/view_categories/'
+        `${config.axios_url}courses/view_categories/`
 
       )
       setCategories(response.data)

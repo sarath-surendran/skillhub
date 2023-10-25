@@ -4,6 +4,7 @@ import course from "../images/pexels-christina-morillo-1181671.jpg";
 import axios from "axios";
 import { json, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import config from "../config";
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
@@ -13,8 +14,8 @@ const HomePage = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        // "http://127.0.0.1:8000/courses/view_categories/"
-		"http://127.0.0.1:8000/courses/view_courses_by_category/"
+        // `${config.axios_url}courses/view_categories/`
+		`${config.axios_url}courses/view_courses_by_category/`
       );
       setCategories(response.data);
     } catch (error) {
@@ -79,7 +80,7 @@ const HomePage = () => {
               <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
                 {category.courses.filter((course) => !course.is_blocked).slice(0,3).map((course)=>{
-          const imageUrl = `http://localhost:8000${course.thumbnail}`
+          const imageUrl = `${config.media_url}${course.thumbnail}`
           return(
             <div
                   key=""

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import config from '../config'
 
 const EmailVerified = (props) => {
     const {token} =  useParams()
@@ -16,7 +17,7 @@ const EmailVerified = (props) => {
 	  
 		  setIsVerifying(true);
         try{
-			let response = await axios.get(`http://localhost:8000/users/register/verify_email/?token=${token}`)
+			let response = await axios.get(`${config.axios_url}users/register/verify_email/?token=${token}`)
 			console.log(response)
 			if(response.status === 200){
 				navigate('/login')

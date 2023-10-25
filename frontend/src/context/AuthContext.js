@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from "react-router-dom"
+import config from "../config";
 
 const AuthContext = createContext()
 
@@ -16,7 +17,7 @@ export const AuthProvider = ({children}) => {
     let login = async (email, password ) => {
         console.log('email',email);
         console.log('password',password)
-        let response = await fetch('http://localhost:8000/api/token/', {
+        let response = await fetch(`${config.axios_url}api/token/`, {
             method:'POST',
             headers:{
                 "Content-type": "application/json"
@@ -62,7 +63,7 @@ export const AuthProvider = ({children}) => {
 
     let updateToken = async () =>{
         console.log("updated token");
-        let response = await fetch('http://localhost:8000/api/token/refresh/',{
+        let response = await fetch(`${config.axios_url}api/token/refresh/`,{
             method:'POST',
             headers:{
                 'Content-type':'application/json'

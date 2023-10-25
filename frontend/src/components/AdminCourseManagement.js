@@ -4,6 +4,7 @@ import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
 import { useEffect } from "react";
+import config from "../config";
 
 const AdminCourseManagement = () => {
   const [courses, setCourses] = useState([]);
@@ -12,7 +13,7 @@ const AdminCourseManagement = () => {
   const fetchAllCourses = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/admin_user/get_courses/",
+        `${config.axios_url}admin_user/get_courses/`,
         {
           headers: {
             // "Content-Type": "multipart/form-data",
@@ -29,7 +30,7 @@ const AdminCourseManagement = () => {
   const blockCourse = async (id) => {
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/admin_user/block_course/?id=${id}`,
+        `${config.axios_url}admin_user/block_course/?id=${id}`,
         {},
         {
           headers: {
@@ -67,7 +68,7 @@ const AdminCourseManagement = () => {
     //             </tr>
 
     //             {courses.map((course, index)=>{
-    //                 const imageurl = `http://127.0.0.1:8000/${course.thumbnail}`
+    //                 const imageurl = `${config.media_url}${course.thumbnail}`
     //                 return(
     //                     <tr>
     //                         <td className="p-4">{index + 1}</td>
@@ -121,8 +122,8 @@ const AdminCourseManagement = () => {
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
                 {courses.map((course, index)=>{
-					const imageUrl = `http://127.0.0.1:8000${course.thumbnail}`
-					const instructor_image = `http://127.0.0.1:8000${course.instructor_image}`
+					const imageUrl = `${config.media_url}${course.thumbnail}`
+					const instructor_image = `${config.media_url}${course.instructor_image}`
 					return(
 						<tr className="border-b border-gray-200 hover:bg-gray-100">
 							<td className="py-3 px-4 text-center">{index + 1}</td>
@@ -149,7 +150,7 @@ const AdminCourseManagement = () => {
 						<td className="py-3 px-6 text-center">
 							<div className="flex items-center justify-center">
 							{course.enrolled_students.slice(0,3).map((student,index)=>{
-								const student_image = `http://127.0.0.1:8000/${student.student_image}`
+								const student_image = `${config.media_url}${student.student_image}`
 								return(
 									<img
 										className="w-6 h-6 rounded-full border-gray-200 border transform hover:scale-125"

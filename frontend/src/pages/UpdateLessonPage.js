@@ -10,6 +10,7 @@ import {
 } from "firebase/storage";
 import AuthContext from "../context/AuthContext";
 import Header from "../components/Header";
+import config from "../config";
 
 const UpdateLessonPage = () => {
   const { id, course_id } = useParams();
@@ -30,7 +31,7 @@ const UpdateLessonPage = () => {
   const fetchLessonData = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/courses/view_courses/lessons/update_lesson/?id=${id}`
+        `${config.axios_url}courses/view_courses/lessons/update_lesson/?id=${id}`
       );
       setLesson(response.data);
       // setFormData(response.data)
@@ -90,7 +91,7 @@ const UpdateLessonPage = () => {
 
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/courses/view_courses/lessons/update_lesson/?id=${id}`,
+        `${config.axios_url}courses/view_courses/lessons/update_lesson/?id=${id}`,
         // courseData,
         formData,
 

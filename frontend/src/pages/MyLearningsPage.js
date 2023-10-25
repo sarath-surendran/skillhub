@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import Header from '../components/Header'
+import config from '../config'
 
 
 const MyLearningsPage = () => {
@@ -16,7 +17,7 @@ const MyLearningsPage = () => {
     const fetchEnrolledCourses = async () => {
         try{
             const response = await axios.get(
-                'http://127.0.0.1:8000/enrollments/enrolled_courses/',
+                `${config.axios_url}enrollments/enrolled_courses/`,
                 {
                     headers: {
                         Authorization: `Bearer ${authToken.access}`,
@@ -50,7 +51,7 @@ const MyLearningsPage = () => {
                 {enrolled_courses.map((course)=>{
                     let imageUrl = '';
                     if (course ) {
-                      imageUrl = `http://localhost:8000${course.thumbnail}`;
+                      imageUrl = `${config.media_url}${course.thumbnail}`;
                     }
                     return(
                         <li

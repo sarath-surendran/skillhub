@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
     import ReactPlayer from 'react-player'
 import { useParams } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
+import config from '../config'
     
     const VideoPlayer = ({id, onLessonComplete}) => {
 
@@ -15,7 +16,7 @@ import AuthContext from '../context/AuthContext'
         const fetchLesson = async () => {
             if (id != ''){
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/courses/view_courses/lessons/update_lesson/?id=${id}`
+                    `${config.axios_url}courses/view_courses/lessons/update_lesson/?id=${id}`
                 )
                 setLesson(response.data)
             }
@@ -42,7 +43,7 @@ import AuthContext from '../context/AuthContext'
         }
         const handleVideoEnded = () => {
             axios.post(
-                `http://127.0.0.1:8000/course_progress/mark_lesson_as_complete/?id=${id}`,
+                `${config.axios_url}course_progress/mark_lesson_as_complete/?id=${id}`,
                 {progress:1.0},
                 {
                     headers: {

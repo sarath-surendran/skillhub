@@ -6,6 +6,7 @@ import AuthContext from "../context/AuthContext";
 import * as Yup from "yup";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import Header from "../components/Header";
+import config from "../config";
 
 const UpdateCoursePage = () => {
   const { id } = useParams();
@@ -66,7 +67,7 @@ const UpdateCoursePage = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/courses/view_categories/"
+        `${config.axios_url}courses/view_categories/`
       );
       setCategories(response.data);
     } catch (error) {
@@ -77,7 +78,7 @@ const UpdateCoursePage = () => {
   const fetchCourseData = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/courses/view_courses/update_course/?id=${id}`
+        `${config.axios_url}courses/view_courses/update_course/?id=${id}`
       );
       setCourse(response.data);
     } catch (error) {
@@ -139,7 +140,7 @@ const UpdateCoursePage = () => {
 
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/courses/view_courses/update_course/?id=${id}`,
+        `${config.axios_url}courses/view_courses/update_course/?id=${id}`,
         // courseData,
         formData,
 
@@ -164,7 +165,7 @@ const UpdateCoursePage = () => {
   let imageUrl = ''
   if (!thumbnailChange){
         
-        imageUrl = `http://localhost:8000${course.thumbnail}`
+        imageUrl = `${config.media_url}${course.thumbnail}`
         
   }
   console.log("imageurl:",newThumbnailUrl)

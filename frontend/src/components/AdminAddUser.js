@@ -7,6 +7,7 @@ import AuthContext from '../context/AuthContext';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import config from '../config';
 
 const registraionSchema = Yup.object().shape({
     name: Yup.string()
@@ -57,7 +58,7 @@ const AdminAddUser = () => {
         console.log("submit fuction called");
         try {
           let response = await axios.post(
-            "http://localhost:8000/users/register/",
+            `${config.axios_url}users/register/`,
             formData
           );
           console.log("User registerd ", response);

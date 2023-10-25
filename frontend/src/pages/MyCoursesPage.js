@@ -7,6 +7,7 @@ import { BsPencilFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import AuthContext from "../context/AuthContext";
 import Swal from 'sweetalert2'
+import config from "../config";
 
 const MyCoursesPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const MyCoursesPage = () => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/courses/view_courses/"
+        `${config.axios_url}courses/view_courses/`
       );
       setCourses(response.data);
     } catch (error) {
@@ -27,7 +28,7 @@ const MyCoursesPage = () => {
   const deleteCourse = async (course_id) => {
     // try {
       // const response = await axios.delete(
-      //   `http://127.0.0.1:8000/courses/view_courses/delete/?id=${course_id}`,
+      //   `${config.axios_url}courses/view_courses/delete/?id=${course_id}`,
       //   {
       //     headers: {
       //       Authorization: `Bearer ${authToken.access}`,
@@ -53,7 +54,7 @@ const MyCoursesPage = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.delete(
-            `http://127.0.0.1:8000/courses/view_courses/delete/?id=${course_id}`,
+            `${config.axios_url}courses/view_courses/delete/?id=${course_id}`,
             {
               headers: {
                 Authorization: `Bearer ${authToken.access}`,
@@ -98,7 +99,7 @@ const MyCoursesPage = () => {
           <p className="text-2x1 font-bold mb-4">My Courses List</p>
           <ul className="space-y-4 mb-6">
 		  {courses.map((item) => {
-			const imageUrl = `http://localhost:8000${item.thumbnail}`
+			const imageUrl = `${config.media_url}${item.thumbnail}`
             return (
             //   <div className="flex justify-between">
             //     <li

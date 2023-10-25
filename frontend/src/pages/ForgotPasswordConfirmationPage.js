@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
+import config from "../config";
 
 const forgotPasswordSchema = Yup.object().shape({
     new_password: Yup.string().required("Password is required"),
@@ -49,7 +50,7 @@ const ForgotPasswordConfirmationPage = () => {
     console.log("submit fuction called");
     try {
       let response = await axios.post(
-        "http://localhost:8000/users/forgot_password_confirm/",
+        `${config.axios_url}users/forgot_password_confirm/`,
         formData
       );
       // console.log("User registerd ", response);

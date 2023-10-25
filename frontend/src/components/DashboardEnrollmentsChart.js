@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import AuthContext from '../context/AuthContext';
+import config from '../config';
 
 // interface ChartThreeState {
 //     series: number[];
@@ -65,7 +66,7 @@ const DashboardEnrollmentsChart = () => {
       const fetchPaidEnrollments = async () => {
           try{
               const response = await axios.get(
-                  "http://127.0.0.1:8000/admin_user/get_paid_enrollments/",
+                  `${config.axios_url}admin_user/get_paid_enrollments/`,
                   {
                   headers: {
                       // "Content-Type": "multipart/form-data",
@@ -82,7 +83,7 @@ const DashboardEnrollmentsChart = () => {
       const fetchFreeEnrollments = async () => {
           try{
               const response = await axios.get(
-                  "http://127.0.0.1:8000/admin_user/get_free_enrollments/",
+                  `${config.axios_url}admin_user/get_free_enrollments/`,
                   {
                   headers: {
                       // "Content-Type": "multipart/form-data",

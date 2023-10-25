@@ -11,6 +11,7 @@ import {
 } from "firebase/storage";
 import AuthContext from "../context/AuthContext";
 import Swal from 'sweetalert2'
+import config from "../config";
 
 const ListLessons = () => {
 	const { id } = useParams();
@@ -35,7 +36,7 @@ const ListLessons = () => {
 	const fetchlessons = async (id) => {
 		try {
 			const response = await axios.get(
-				`http://127.0.0.1:8000/courses/view_courses/lessons/?id=${id}`
+				`${config.axios_url}courses/view_courses/lessons/?id=${id}`
 			);
 			setLessons(response.data);
 		} catch (error) {
@@ -46,7 +47,7 @@ const ListLessons = () => {
 	const deleteLesson = async (lesson_id) => {
 		// try {
 		// 	const response = await axios.delete(
-		// 		`http://127.0.0.1:8000/courses/view_courses/lessons/delete/?id=${lesson_id}`,
+		// 		`${config.axios_url}courses/view_courses/lessons/delete/?id=${lesson_id}`,
 
 		// 		{
 		// 			headers: {
@@ -74,7 +75,7 @@ const ListLessons = () => {
 				if (result.isConfirmed) {
 					try {
 						const response = await axios.delete(
-							`http://127.0.0.1:8000/courses/view_courses/lessons/delete/?id=${lesson_id}`,
+							`${config.axios_url}courses/view_courses/lessons/delete/?id=${lesson_id}`,
 			
 							{
 								headers: {
@@ -173,7 +174,7 @@ const ListLessons = () => {
 			//   };
 
 			const response = await axios.post(
-				`http://127.0.0.1:8000/courses/view_courses/lessons/add_lesson/?id=${id}`,
+				`${config.axios_url}courses/view_courses/lessons/add_lesson/?id=${id}`,
 				// newLesson,
 				// lessonData,
 				formData,

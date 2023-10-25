@@ -5,6 +5,7 @@ import { useState } from 'react'
 import {GiTeacher} from 'react-icons/gi'
 import AuthContext from '../context/AuthContext'
 import { useEffect } from 'react'
+import config from '../config'
 
 const DashboardInstructorCard = () => {
     const [allInstructors, setAllInstructors] = useState([])
@@ -12,7 +13,7 @@ const DashboardInstructorCard = () => {
     const {authToken} = useContext(AuthContext)
     const fetchAllInstructors = async () => {
         const response = await axios.get(
-            'http://127.0.0.1:8000/admin_user/get_instructors/',
+            `${config.axios_url}admin_user/get_instructors/`,
             {
                 headers: {
                   // "Content-Type": "multipart/form-data",

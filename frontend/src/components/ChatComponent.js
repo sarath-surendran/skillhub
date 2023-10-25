@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
+import config from '../config';
 
 const ChatComponent = ({reciever_id, course_id}) => {
 
@@ -21,7 +22,7 @@ const ChatComponent = ({reciever_id, course_id}) => {
     console.log("fetching")
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/chats/get_messages/?receiver=${reciever_id}&course=${course_id}`,
+        `${config.axios_url}chats/get_messages/?receiver=${reciever_id}&course=${course_id}`,
         {
           headers: {
             Authorization: `Bearer ${authToken.access}`,
@@ -38,7 +39,7 @@ const ChatComponent = ({reciever_id, course_id}) => {
   const fetchReceiverDetails = async () => {
     try{
       const response = await axios.get(
-        `http://127.0.0.1:8000/chats/get_receiver_details/?receiver=${reciever_id}`,
+        `${config.axios_url}chats/get_receiver_details/?receiver=${reciever_id}`,
         {
           headers: {
             Authorization: `Bearer ${authToken.access}`,
@@ -58,7 +59,7 @@ const ChatComponent = ({reciever_id, course_id}) => {
     fetchReceiverDetails()
     fetchMessages();
     const socket = new WebSocket(
-      `ws://127.0.0.1:8000/ws/chat/${reciever_id}/${user.id}/${course_id}/`
+      `${config.socket_url}/ws/chat/${reciever_id}/${user.id}/${course_id}/`
     );
 
     socket.onopen = () => {
@@ -139,7 +140,7 @@ const ChatComponent = ({reciever_id, course_id}) => {
   }
   let imageUrl = ''
   if (receiverDetails){
-    imageUrl = `http://localhost:8000${receiverDetails.image}`;
+    imageUrl = `${config.media_url}${receiverDetails.image}`;
   }
 
   return (

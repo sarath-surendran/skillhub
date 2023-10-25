@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import AuthContext from "../context/AuthContext";
 import signupimage from "../images/signup.jpg";
 import Header from "../components/Header";
+import config from "../config";
 
 const registraionSchema = Yup.object().shape({
   name: Yup.string()
@@ -63,7 +64,7 @@ const RegistrationPage = () => {
     console.log("submit fuction called");
     try {
       let response = await axios.post(
-        "http://localhost:8000/users/register/",
+        `${config.axios_url}users/register/`,
         formData
       );
       console.log("User registerd ", response);
@@ -79,7 +80,7 @@ const RegistrationPage = () => {
   };
   // const createAccesstoken = async () =>{
   //     try{
-  //         let loginresponse = await axios.post('http://localhost:8000/api/token/',{
+  //         let loginresponse = await axios.post(`${config.axios_url}api/token/`,{
   //             email:formData.email,
   //             password:formData.password
   //         })

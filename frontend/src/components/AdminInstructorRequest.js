@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import config from "../config";
 
 const AdminInstructorRequest = () => {
   const [ws, setws] = useState(null);
@@ -9,7 +10,7 @@ const AdminInstructorRequest = () => {
   const fetchPendingRequests = async () => {
     try{
       const response = await axios.get(
-        'http://127.0.0.1:8000/admin_user/pending_requests/',
+        `${config.axios_url}admin_user/pending_requests/`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -29,7 +30,7 @@ const AdminInstructorRequest = () => {
   useEffect(() => {
     fetchPendingRequests()
     const socket = new WebSocket(
-      `ws://127.0.0.1:8000/ws/instructor_application/${user.id}/`
+      `${config.socket_url}/ws/instructor_application/${user.id}/`
     );
     socket.onopen = () => {
       //     alert('on')
@@ -60,7 +61,7 @@ const AdminInstructorRequest = () => {
   const request_reject = async (id) => {
     try{
       const response = await axios.post(
-        `http://127.0.0.1:8000/admin_user/pending_requests/reject/?id=${id}`,{},
+        `${config.axios_url}admin_user/pending_requests/reject/?id=${id}`,{},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -80,7 +81,7 @@ const AdminInstructorRequest = () => {
   const request_accept = async (id) => {
     try{
       const response = await axios.post(
-        `http://127.0.0.1:8000/admin_user/pending_requests/accept/?id=${id}`,{},
+        `${config.axios_url}admin_user/pending_requests/accept/?id=${id}`,{},
         {
           headers: {
             "Content-Type": "multipart/form-data",

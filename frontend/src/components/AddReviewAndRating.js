@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext } from 'react'
 import { useState } from 'react';
 import AuthContext from '../context/AuthContext';
+import config from '../config';
 
 const AddReviewAndRating = ({course_id}) => {
     const [rating, setRating] = useState(0);
@@ -21,7 +22,7 @@ const AddReviewAndRating = ({course_id}) => {
     console.log('Review:', review);
     try{
         const response = await axios.post(
-            "http://127.0.0.1:8000/review&ratings/add_review/",
+            `${config.axios_url}review&ratings/add_review/`,
             {
                 "user":user.id,
                 "course":course_id,

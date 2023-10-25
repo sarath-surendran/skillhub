@@ -5,6 +5,7 @@ import {BsBook} from 'react-icons/bs'
 import AuthContext from '../context/AuthContext'
 import axios from 'axios'
 import { useEffect } from 'react'
+import config from '../config'
 
 const DashboardcoursesCard = () => {
   const [allCourse, setAllCourses] = useState([])
@@ -13,7 +14,7 @@ const DashboardcoursesCard = () => {
   const fetchAllCourses = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/admin_user/get_courses/",
+        `${config.axios_url}admin_user/get_courses/`,
         {
           headers: {
             // "Content-Type": "multipart/form-data",

@@ -3,6 +3,7 @@ import AuthContext from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import profile from '../images/images.png'
 import axios from 'axios'
+import config from '../config'
 
 const UserSideBar = () => {
     let {user,logout, authToken} = useContext(AuthContext)
@@ -10,7 +11,7 @@ const UserSideBar = () => {
     const [profile, setProfile] = useState([])
 
     const fetchProfile = async () => {
-      const response = await axios.get(`http://127.0.0.1:8000/profile/`, {
+      const response = await axios.get(`${config.axios_url}profile/`, {
         headers: {
           Authorization: `Bearer ${authToken.access}`,
         },
@@ -21,7 +22,7 @@ const UserSideBar = () => {
     const applyForInstructor = async () => {
       try{
         const response = await axios.post(
-          'http://127.0.0.1:8000/profile/apply_for_instructor/',{},
+          `${config.axios_url}profile/apply_for_instructor/`,{},
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -40,7 +41,7 @@ const UserSideBar = () => {
   //   console.log(profile.image)
     let imageUrl = '';
     if (profile ) {
-      imageUrl = `http://localhost:8000${profile.image}`;
+      imageUrl = `${config.media_url}${profile.image}`;
     }
     // console.log(imageUrl);
     useEffect(() => {

@@ -8,6 +8,7 @@ import ProgressBar from '../components/ProgressBar'
 import Header from '../components/Header'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf';
+import config from '../config'
 
 
 const EnrolledCoursePage = () => {
@@ -24,7 +25,7 @@ const EnrolledCoursePage = () => {
     
     const fetchLessons = async () => {
         const response = await axios.get(
-            `http://127.0.0.1:8000/courses/view_courses/lessons/?id=${id}`
+            `${config.axios_url}courses/view_courses/lessons/?id=${id}`
         )
         setLessons(response.data)
         // console.log("data",response.data[0].id)
@@ -35,7 +36,7 @@ const EnrolledCoursePage = () => {
     const fetchCourseDetails = async () => {
       try{
           const response = await axios.get(
-              `http://127.0.0.1:8000/courses/get_course/?id=${id}`,
+              `${config.axios_url}courses/get_course/?id=${id}`,
               {
                 headers: {
                   //   "Content-Type": "multipart/form-data",
@@ -55,7 +56,7 @@ const EnrolledCoursePage = () => {
   const fetchProgress = async () => {
     console.log("called progress")
     const response = await axios.get(
-      `http://127.0.0.1:8000/course_progress/get_progress/?id=${id}`,
+      `${config.axios_url}course_progress/get_progress/?id=${id}`,
       {
         headers: {
           //   "Content-Type": "multipart/form-data",
@@ -72,7 +73,7 @@ const EnrolledCoursePage = () => {
       // get completed courses from backend and update the state completedCourses
       try{
           const response = await axios.get(
-              `http://127.0.0.1:8000/course_progress/get_completed_lessons/?id=${id}`,
+              `${config.axios_url}course_progress/get_completed_lessons/?id=${id}`,
               {
                 headers: {
                   //   "Content-Type": "multipart/form-data",

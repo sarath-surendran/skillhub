@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import AuthContext from '../context/AuthContext'
 import axios from 'axios'
+import config from '../config'
 
 const CommunityChat = ({course_id}) => {
 
@@ -16,7 +17,7 @@ const CommunityChat = ({course_id}) => {
   const fetchMessages = async () => {
     try{
       const response = await axios.get(
-        `http://127.0.0.1:8000/chats/get_community_messages/?id=${course_id}`,
+        `${config.axios_url}chats/get_community_messages/?id=${course_id}`,
         {
           headers: {
             Authorization: `Bearer ${authToken.access}`,
@@ -35,7 +36,7 @@ const CommunityChat = ({course_id}) => {
   const fetchCourseDetails = async () => {
     try{
       const response = await axios.get(
-        `http://127.0.0.1:8000/chats/get_course_details/?id=${course_id}`,
+        `${config.axios_url}chats/get_course_details/?id=${course_id}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -56,7 +57,7 @@ const CommunityChat = ({course_id}) => {
     fetchCourseDetails()
     fetchMessages()
 		const socket = new WebSocket(
-			`ws://127.0.0.1:8000/ws/community_chat/${course_id}/${user.id}/`
+			`${config.socket_url}/ws/community_chat/${course_id}/${user.id}/`
 		)
 		socket.onopen = () => {
 			console.log("Socket connection established")
@@ -101,7 +102,7 @@ const CommunityChat = ({course_id}) => {
                 </svg>
               </span>
               <img
-                src={`http://127.0.0.1:8000${courseDetails.thumbnail}`}
+                src={`${config.media_url}${courseDetails.thumbnail}`}
                 alt=""
                 class="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
               />

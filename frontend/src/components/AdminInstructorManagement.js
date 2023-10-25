@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import AuthContext from '../context/AuthContext'
+import config from '../config'
 
 const AdminInstructorManagement = () => {
 
@@ -10,7 +11,7 @@ const AdminInstructorManagement = () => {
 
     const fetchAllInstructors = async () => {
         const response = await axios.get(
-            'http://127.0.0.1:8000/admin_user/get_instructors/',
+            `${config.axios_url}admin_user/get_instructors/`,
             {
                 headers: {
                   // "Content-Type": "multipart/form-data",
@@ -35,7 +36,7 @@ const AdminInstructorManagement = () => {
     const blockUser = async (id) => {
         try{
             const response = await axios.patch(
-                `http://127.0.0.1:8000/admin_user/block_user/?id=${id}`,
+                `${config.axios_url}admin_user/block_user/?id=${id}`,
                 {},
                 {
                     headers: {
@@ -56,7 +57,7 @@ const AdminInstructorManagement = () => {
       const suspend = async (user_id) => {
         try{
           const response = await axios.post(
-            `http://127.0.0.1:8000/admin_user/suspend_instructor/?id=${user_id}`,{},
+            `${config.axios_url}admin_user/suspend_instructor/?id=${user_id}`,{},
             {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -93,7 +94,7 @@ const AdminInstructorManagement = () => {
                 <th className="p-4">Actions</th>
           </tr>
           {instructors.map((instructor,index)=>{
-            const instructor_image = `http://127.0.0.1:8000${instructor.image}`;
+            const instructor_image = `${config.media_url}${instructor.image}`;
             return(
                 <tr>
                     <td className="p-4">{index + 1}</td>
@@ -118,7 +119,7 @@ const AdminInstructorManagement = () => {
                         <td className='p-4'>
                             <ul>
                                 {instructor.courses.map((course) => {
-                                    const course_image =  `http://127.0.0.1:8000/${course.thumbnail}`
+                                    const course_image =  `${config.media_url}${course.thumbnail}`
                                     return(
                                     <li className=' text-center mb-4 border rounded-lg' onClick={() => toggleCourseDetails(course.id)} key={course.id}>
                                         {/* <img src={course_image} alt={course.name} style={{ maxWidth: "100px", maxHeight: "100px" }}/> */}

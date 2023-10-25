@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import AuthContext from "../context/AuthContext";
+import config from "../config";
 
 const AdminUserManagment = () => {
   const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ const AdminUserManagment = () => {
   const fetchAllUsers = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/admin_user/get_users/",
+        `${config.axios_url}admin_user/get_users/`,
         {
           headers: {
             // "Content-Type": "multipart/form-data",
@@ -28,7 +29,7 @@ const AdminUserManagment = () => {
   const blockUser = async (id) => {
 	try{
 		const response = await axios.patch(
-			`http://127.0.0.1:8000/admin_user/block_user/?id=${id}`,
+			`${config.axios_url}admin_user/block_user/?id=${id}`,
 			{},
 			{
 				headers: {
@@ -48,7 +49,7 @@ const AdminUserManagment = () => {
   const makeAdmin = async (user_id) => {
     try{
       const response = await axios.post(
-        `http://127.0.0.1:8000/admin_user/make_admin/?id=${user_id}`,{},
+        `${config.axios_url}admin_user/make_admin/?id=${user_id}`,{},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -67,7 +68,7 @@ const AdminUserManagment = () => {
   const makeInstructor = async (user_id) => {
     try{
       const response = await axios.post(
-        `http://127.0.0.1:8000/admin_user/make_instructor/?id=${user_id}`,{},
+        `${config.axios_url}admin_user/make_instructor/?id=${user_id}`,{},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -86,7 +87,7 @@ const AdminUserManagment = () => {
   const suspend = async (user_id) => {
     try{
       const response = await axios.post(
-        `http://127.0.0.1:8000/admin_user/suspend_instructor/?id=${user_id}`,{},
+        `${config.axios_url}admin_user/suspend_instructor/?id=${user_id}`,{},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -124,7 +125,7 @@ const AdminUserManagment = () => {
           </tr>
 
           {users.map((user, index) => {
-            const imageurl = `http://127.0.0.1:8000${user.image}`;
+            const imageurl = `${config.media_url}${user.image}`;
             return (
               <tr>
                 <td className="p-4">{index + 1}</td>

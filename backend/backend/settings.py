@@ -87,20 +87,20 @@ ASGI_APPLICATION = "backend.asgi.application"
 #         },
 #     },
 # }
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis", 6379)],
-        },
-    },
-}
-
 # CHANNEL_LAYERS = {
 #     "default": {
-#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("redis", 6379)],
+#         },
 #     },
 # }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Celery configurations testing
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'  # or your broker URL
@@ -110,11 +110,11 @@ CHANNEL_LAYERS = {
 # CELERY_RESULT_SERIALIZER = 'json'
 
 # Celery Configuration - production
-CELERY_BROKER_URL = "redis://redis:6379/0"
-CELERY_RESULT_BACKEND = "redis://redis:6379/0"
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
+# CELERY_BROKER_URL = "redis://redis:6379/0"
+# CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+# CELERY_ACCEPT_CONTENT = ["json"]
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_RESULT_SERIALIZER = "json"
 
 
 # celery beat confifuration
@@ -167,7 +167,7 @@ DATABASES = {
         'NAME': 'skillhub',
         'USER': config("USER"),
         'PASSWORD':config("PASSWORD"),
-        'HOST': 'postgres',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

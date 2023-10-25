@@ -3,6 +3,7 @@ import UserSideBar from "../components/UserSideBar";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
 import Header from "../components/Header";
+import config from "../config";
 
 const UserProfilePage = () => {
   const { user, authToken } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const UserProfilePage = () => {
 
   const fetchProfile = async () => {
     try{
-		const response = await axios.get(`http://127.0.0.1:8000/profile/`, {
+		const response = await axios.get(`${config.axios_url}profile/`, {
 				headers: {
 					Authorization: `Bearer ${authToken.access}`,
 				},
@@ -39,7 +40,7 @@ const UserProfilePage = () => {
 	// console.log("editingData",editingData)
 	try{
 		const response = await axios.post(
-			`http://127.0.0.1:8000/profile/`,
+			`${config.axios_url}profile/`,
 			{
 				'qualification':editingData.qualification,
 				'employement': editingData.employement
