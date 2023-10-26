@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bf9457b8.css",
+    "main.js": "/static/js/main.e4d7089a.js",
+    "static/js/703.dd222d96.chunk.js": "/static/js/703.dd222d96.chunk.js",
+    "static/js/513.5ec9fa12.chunk.js": "/static/js/513.5ec9fa12.chunk.js",
+    "static/media/pexels-christina-morillo-1181671.jpg": "/static/media/pexels-christina-morillo-1181671.e467b4c31cef0c493df3.jpg",
+    "static/media/signup.jpg": "/static/media/signup.63f741ab362e33eae713.jpg",
+    "static/media/Banner.jpg": "/static/media/Banner.a6fb356fc3f455892731.jpg",
+    "static/media/login.jpg": "/static/media/login.707d301434840a3920d6.jpg",
+    "static/media/skillhub.png": "/static/media/skillhub.93df6bbd8f1bda5f291d.png",
+    "index.html": "/index.html",
+    "main.bf9457b8.css.map": "/static/css/main.bf9457b8.css.map",
+    "main.e4d7089a.js.map": "/static/js/main.e4d7089a.js.map",
+    "703.dd222d96.chunk.js.map": "/static/js/703.dd222d96.chunk.js.map",
+    "513.5ec9fa12.chunk.js.map": "/static/js/513.5ec9fa12.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bf9457b8.css",
+    "static/js/main.e4d7089a.js"
+  ]
+}
