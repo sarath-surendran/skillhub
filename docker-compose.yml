@@ -41,7 +41,9 @@ services:
     volumes:
       - certbot_conf:/etc/letsencrypt
       - certbot_www:/var/www/certbot
+    # command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
     command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
+
 
     depends_on:
       - nginx
