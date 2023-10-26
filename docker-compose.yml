@@ -25,7 +25,7 @@ services:
       - 443:443
     restart: unless-stopped
     volumes:
-      # - nginx:/etc/nginx/conf.d
+      - nginx:/etc/nginx/conf.d
       - static:/static
       - media:/media
       # - certbot_conf:/etc/letsencrypt
@@ -130,6 +130,6 @@ volumes:
   static:
   media:
   postgres_data: 
-  # nginx:
+  nginx:
   # certbot_conf:
   # certbot_www:
