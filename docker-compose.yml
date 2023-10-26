@@ -12,59 +12,7 @@ services:
     command: serve -s -l 3000
     depends_on:
       - backend
-
   
-
-  nginx:
-    container_name: nginx
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile.nginx
-    ports:  
-      - 80:80
-      - 443:443
-    restart: unless-stopped
-    volumes:
-      # - nginx:/etc/nginx/conf.d
-      - static:/static
-      - media:/media
-      - certbot_conf:/etc/letsencrypt
-      - certbot_www:/var/www/certbot
-      
-    depends_on:
-      - backend
-
-
-  certbot:
-    container_name: certbot
-    image: certbot/certbot
-    volumes:
-      - certbot_conf:/etc/letsencrypt
-      - certbot_www:/var/www/certbot
-    # command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
-    command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
-
-
-    depends_on:
-      - nginx
-
-
-
-
-  postgres:
-    restart: unless-stopped
-    image: postgres:13
-    container_name: db
-    environment:
-      POSTGRES_DB: skillhub
-      POSTGRES_USER: skillhub
-      POSTGRES_PASSWORD: skillhub@123
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5435:5432"
-
-
   backend:
     restart: unless-stopped
     container_name: backend
@@ -84,6 +32,60 @@ services:
     depends_on:
       - redis
       - postgres
+
+  
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.nginx
+    ports:  
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    volumes:
+      # - nginx:/etc/nginx/conf.d
+      - static:/static
+      - media:/media
+      # - certbot_conf:/etc/letsencrypt
+      # - certbot_www:/var/www/certbot
+      
+    depends_on:
+      - backend
+
+
+  # certbot:
+  #   container_name: certbot
+  #   image: certbot/certbot
+  #   volumes:
+  #     - certbot_conf:/etc/letsencrypt
+  #     - certbot_www:/var/www/certbot
+  #   # command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
+  #   command: certonly --webroot -w /var/www/certbot -d skillhub.tech -d www.skillhub.tech --non-interactive --agree-tos --email sarathcm0@gmail.com
+
+
+  #   depends_on:
+  #     - nginx
+
+
+
+
+  postgres:
+    restart: unless-stopped
+    image: postgres:13
+    container_name: db
+    environment:
+      POSTGRES_DB: skillhub
+      POSTGRES_USER: skillhub
+      POSTGRES_PASSWORD: skillhub@123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+
+
+  
    
 
  
@@ -133,5 +135,5 @@ volumes:
   media:
   postgres_data: 
   # nginx:
-  certbot_conf:
-  certbot_www:
+  # certbot_conf:
+  # certbot_www:
