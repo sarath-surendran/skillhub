@@ -31,6 +31,7 @@ import AdminInstructorApprovalPage from './pages/AdminInstructorApprovalPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import ForgotPasswordConfirmationPage from './pages/ForgotPasswordConfirmationPage';
 import CategorywiseListingPage from './pages/CategorywiseListingPage';
+import AdminCatagoryManagement from './pages/AdminCatagoryManagement';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
               <Route path='/admin/users' element={<AdminUserManagementPage/>}/>
               <Route path='/admin/add_user'element={<AdminAddUserPage/>}/>
               <Route path='/admin/courses' element={<AdminCourseManagementPage/>}/>
+              <Route path='/admin/categories' element={<AdminCatagoryManagement/>}/>
               <Route path='/admin/instructors' element={<AdminInstructorManagementPage/>}/>
               <Route path='/admin/instructor_requests' element={<AdminInstructorApprovalPage/>}/>
             </Route>

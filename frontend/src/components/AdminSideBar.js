@@ -55,6 +55,7 @@ const AdminSideBar = () => {
             {/* ********* */}
             {/* <p onClick={()=>{navigate('/admin/instructors')}} className='cursor-pointer' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2rem' }}><GiTeacher style={{ marginRight: '10px', width: '1.5em', height: '1.5em' }}/>Instructors</p> */}
             <p onClick={()=>{navigate('/admin/courses')}} className='cursor-pointer' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2rem' }}><BsBook style={{ marginRight: '10px', width: '1.5em', height: '1.5em' }}/>Courses</p>
+            <p onClick={()=>{navigate('/admin/categories')}} className='cursor-pointer' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2rem' }}><BsBook style={{ marginRight: '10px', width: '1.5em', height: '1.5em' }}/>Categories</p>
             {/* <p  className='cursor-pointer' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2rem' }}><VscGraphLine style={{ marginRight: '10px', width: '1.5em', height: '1.5em', color:'yellow' }}/>Sales</p> */}
             <p className='cursor-pointer' onClick={logout} style={{ display: 'flex', alignItems: 'center', fontSize: '1.2rem' }}><BiLogOut style={{ marginRight: '10px', width: '1.5em', height: '1.5em', color:'red' }}/>Sign out</p>
         </div>

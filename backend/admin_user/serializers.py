@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from users.models import CustomUser as User
 from userprofile.models import Profile
-from courses.models import Course, Lesson
+from courses.models import Course, Lesson, Category
 from enrollments.models import Enrollment
 from course_progress.models import Progress
 from .models import InstructorApplication
@@ -144,3 +144,8 @@ class GetEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = "__all__"
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

@@ -179,3 +179,20 @@ class GetFreeEnrollments(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error':e}, status=status.HTTP_400_BAD_REQUEST)
+
+class ViewCategories(APIView):
+    def get(self, request):
+        try:
+            print("ok")
+            categories = Category.objects.all()
+            serializer = CategorySerializer(categories, many = True)
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        except:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AddCategory(APIView):
+    def post(self, request):
+        name = request.data.get('category_name')
+        print(name)
+        Category.objects.create(name=name)
+        return Response({"message":"ok"}, status=status.HTTP_200_OK)

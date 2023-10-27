@@ -16,4 +16,6 @@ urlpatterns = [
     path('pending_requests/accept/',AcceptRequest.as_view(), name="accept request"),
     path('get_paid_enrollments/', GetPaidCourseEnrollment.as_view(), name="get_paid_enrollments"),
     path('get_free_enrollments/', GetFreeEnrollments.as_view(), name="get_free_enrollments"),
+    path('get_categories/', ViewCategories.as_view()),
+    path('add_category/',AddCategory.as_view()),
 ]
