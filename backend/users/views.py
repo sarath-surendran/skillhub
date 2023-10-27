@@ -55,7 +55,7 @@ class RegisterView(APIView):
 
         # verification_link = reverse('email_verification', args=[verification_token])
         # verification_url = f'http://localhost:3000{verification_link}' 
-        verification_url = f'http://localhost:3000/register/email_verified/{verification_token}/'
+        verification_url = f'https://skillhub.tech/register/email_verified/{verification_token}/'
 
         subject = 'Email Verification'
         message = f'Click the following link to verify your email: {verification_url}'

@@ -11,7 +11,7 @@ def send_password_reset_email(sender, instance, created, **kwargs):
         print("email to send")
         # instance.token = get_random_string(length=32)
         # instance.save()
-        reset_link = f"http://localhost:3000/forgot-password/token/{instance.token}"
+        reset_link = f"https://skillhub.tech/forgot-password/token/{instance.token}"
         print(reset_link)
         # Send the reset email
         subject = "Password Reset Request"
