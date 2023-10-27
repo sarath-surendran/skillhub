@@ -122,10 +122,10 @@ from celery.schedules import crontab
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'  # or your broker URL
 
-ist_hour = 15
-ist_minute = 0
-utc_hour = ist_hour - 5  # Adjust for the UTC offset
-utc_minute = ist_minute - 30  # Adjust for the UTC offset
+# ist_hour = 15
+# ist_minute = 0
+# utc_hour = ist_hour - 5  # Adjust for the UTC offset
+# utc_minute = ist_minute - 30  # Adjust for the UTC offset
 
 CELERY_BEAT_SCHEDULE = {
     'send_daily_reminders': {
