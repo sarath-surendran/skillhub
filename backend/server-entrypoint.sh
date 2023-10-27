@@ -22,7 +22,7 @@ python manage.py migrate --noinput
 
 
 # Create a superuser with custom values and password
-# python manage.py createsuperuser --noinput --username admin --email adminl@gmail.com
+# python manage.py createsuperuser --noinput --username admin --email admin@gmail.com
 # python manage.py changepassword admin admin@123
 python manage.py createsuperuser --noinput
 
